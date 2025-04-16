@@ -1,9 +1,13 @@
-
+// src/pages/Auth.tsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../lib/firebaseConfiguration";  // Firebase auth config
+import { useDispatch } from 'react-redux';
+import { setUser } from "@/slices/authSlice";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
@@ -36,6 +40,7 @@ const Auth = () => {
   const [activeTab, setActiveTab] = useState("login");
   const navigate = useNavigate();
   const { toast } = useToast();
+  const dispatch = useDispatch();
 
   // Login form
   const loginForm = useForm<LoginFormValues>({
@@ -57,24 +62,59 @@ const Auth = () => {
     },
   });
 
-  const onLoginSubmit = (values: LoginFormValues) => {
-    // Simulate login
-    console.log("Login values:", values);
-    toast({
-      title: "Login successful",
-      description: "Welcome back to EduConnect!",
-    });
-    navigate('/');
+  const onLoginSubmit = async (values: LoginFormValues) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
+      const user = userCredential.user;
+
+      // Dispatch user to Redux store
+      dispatch(setUser({
+        email: user.email,
+        uid: user.uid,
+      }));
+
+      toast({
+        title: "Login successful",
+        description: "Welcome back to EduConnect!",
+      });
+
+      navigate('/');
+    } catch (error) {
+      toast({
+        title: "Login failed",
+        description: error.message,
+      });
+    }
   };
 
-  const onRegisterSubmit = (values: RegisterFormValues) => {
-    // Simulate registration
-    console.log("Register values:", values);
-    toast({
-      title: "Registration successful",
-      description: "Welcome to EduConnect!",
-    });
-    navigate('/');
+  const onRegisterSubmit = async (values: RegisterFormValues) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+      const user = userCredential.user;
+
+      // Update user profile if needed
+      await updateProfile(user, {
+        displayName: values.name,
+      });
+
+      // Dispatch user to Redux store
+      dispatch(setUser({
+        email: user.email,
+        uid: user.uid,
+      }));
+
+      toast({
+        title: "Registration successful",
+        description: "Welcome to EduConnect!",
+      });
+
+      navigate('/');
+    } catch (error) {
+      toast({
+        title: "Registration failed",
+        description: error.message,
+      });
+    }
   };
 
   return (
@@ -93,7 +133,7 @@ const Auth = () => {
                 <TabsTrigger value="login">Login</TabsTrigger>
                 <TabsTrigger value="register">Register</TabsTrigger>
               </TabsList>
-              
+
               <TabsContent value="login">
                 <Form {...loginForm}>
                   <form onSubmit={loginForm.handleSubmit(onLoginSubmit)} className="space-y-4">
@@ -104,13 +144,12 @@ const Auth = () => {
                         <FormItem>
                           <FormLabel>Email</FormLabel>
                           <FormControl>
-                            <Input placeholder="name@example.com" {...field} />
+                            <Input {...field} type="email" placeholder="Your email" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
                     <FormField
                       control={loginForm.control}
                       name="password"
@@ -118,20 +157,19 @@ const Auth = () => {
                         <FormItem>
                           <FormLabel>Password</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="******" {...field} />
+                            <Input {...field} type="password" placeholder="Your password" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
-                    <Button type="submit" className="w-full bg-educonnect-purple">
+                    <Button type="submit" className="w-full">
                       Login
                     </Button>
                   </form>
                 </Form>
               </TabsContent>
-              
+
               <TabsContent value="register">
                 <Form {...registerForm}>
                   <form onSubmit={registerForm.handleSubmit(onRegisterSubmit)} className="space-y-4">
@@ -142,13 +180,12 @@ const Auth = () => {
                         <FormItem>
                           <FormLabel>Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="John Doe" {...field} />
+                            <Input {...field} type="text" placeholder="Your name" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
                     <FormField
                       control={registerForm.control}
                       name="email"
@@ -156,13 +193,12 @@ const Auth = () => {
                         <FormItem>
                           <FormLabel>Email</FormLabel>
                           <FormControl>
-                            <Input placeholder="name@example.com" {...field} />
+                            <Input {...field} type="email" placeholder="Your email" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
                     <FormField
                       control={registerForm.control}
                       name="password"
@@ -170,13 +206,12 @@ const Auth = () => {
                         <FormItem>
                           <FormLabel>Password</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="******" {...field} />
+                            <Input {...field} type="password" placeholder="Your password" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
                     <FormField
                       control={registerForm.control}
                       name="confirmPassword"
@@ -184,14 +219,13 @@ const Auth = () => {
                         <FormItem>
                           <FormLabel>Confirm Password</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="******" {...field} />
+                            <Input {...field} type="password" placeholder="Confirm password" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    
-                    <Button type="submit" className="w-full bg-educonnect-purple">
+                    <Button type="submit" className="w-full">
                       Register
                     </Button>
                   </form>

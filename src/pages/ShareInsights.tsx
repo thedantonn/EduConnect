@@ -8,19 +8,19 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
 const subjects = [
-  { id: 'computerScience', name: 'Computer Science' },
-  { id: 'mathematics', name: 'Mathematics' },
-  { id: 'science', name: 'Science' },
-  { id: 'english', name: 'English' },
-  { id: 'history', name: 'History' },
+  { id: 'Software Engineering', name: 'Software Engineering' },
+  { id: 'DMDW', name: 'DMDW' },
+  { id: 'DBMS', name: 'DBMS' },
+  { id: 'DAA', name: 'DAA' },
+  { id: 'NLP', name: 'NLP' },
 ];
 
 const topicsBySubject: Record<string, string[]> = {
-  computerScience: ['Web Development', 'Data Structures', 'Algorithms', 'Programming'],
-  mathematics: ['Algebra', 'Calculus', 'Geometry', 'Statistics'],
-  science: ['Biology', 'Chemistry', 'Physics', 'Earth Science'],
-  english: ['Literature', 'Grammar', 'Writing', 'Vocabulary'],
-  history: ['Ancient History', 'Modern History', 'World Wars', 'Civil Rights'],
+  'Software Engineering': ['Module 1', 'Module 2', 'Module 3', 'Module 4', 'Module 5'],
+  'DMDW': ['Module 1', 'Module 2', 'Module 3', 'Module 4', 'Module 5'],
+  'DBMS': ['Module 1', 'Module 2', 'Module 3', 'Module 4', 'Module 5'],
+  'DAA': ['Module 1', 'Module 2', 'Module 3', 'Module 4', 'Module 5'],
+  'NLP': ['Module 1', 'Module 2', 'Module 3', 'Module 4', 'Module 5'],
 };
 
 const ShareInsights = () => {

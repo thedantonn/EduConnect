@@ -1,4 +1,7 @@
+// src/App.tsx
 
+import { Provider } from "react-redux";
+import store from "@/utils/appStore";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,27 +13,65 @@ import SelectQuery from "./pages/SelectQuery";
 import ShareInsights from "./pages/ShareInsights";
 import Feedback from "./pages/Feedback";
 import Auth from "./pages/Auth";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import LandingPage from "./pages/Landing"; // Import the LandingPage
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/select-query" element={<SelectQuery />} />
-          <Route path="/share-insights" element={<ShareInsights />} />
-          <Route path="/feedback" element={<Feedback />} />
-          <Route path="/auth" element={<Auth />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            {/* Show Landing Page First at '/lnd' */}
+            <Route path="/lnd" element={<LandingPage />} />
+
+            {/* Show Login Page after clicking "Get Started" */}
+            <Route path="/auth" element={<Auth />} />
+
+            {/* Protected Routes after login */}
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Index />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/select-query"
+              element={
+                <ProtectedRoute>
+                  <SelectQuery />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/share-insights"
+              element={
+                <ProtectedRoute>
+                  <ShareInsights />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/feedback"
+              element={
+                <ProtectedRoute>
+                  <Feedback />
+                </ProtectedRoute>
+              }
+            />
+            {/* Catch-all route for 404 - Not Found */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </Provider>
 );
 
 export default App;

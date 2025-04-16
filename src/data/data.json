@@ -1,0 +1,114 @@
+{
+    "Software Engineering": {
+      "Module 1": {
+        "topics": ["Software Development Life Cycle", "Requirements Engineering", "System Design"],
+        "pdfLink": "public/pdf/SE-Module-1.pdf"
+      },
+      "Module 2": {
+        "topics": ["Software Testing", "Agile Methodologies", "UML Diagrams"],
+        "pdfLink": "public/pdf/SE-Module-2 - Requirement Engg.pdf"
+      },
+      "Module 3": {
+        "topics": ["Software Maintenance", "Version Control Systems", "Code Refactoring"],
+        "pdfLink": "public/pdf/SE-Module-3 - Project Management.key"
+      },
+      "Module 4": {
+        "topics": ["Project Management", "Risk Management", "Quality Assurance"],
+        "pdfLink": "/public/softwareEngineering/module4.pdf"
+      },
+      "Module 5": {
+        "topics": ["Software Metrics", "Performance Testing", "Security in Software Engineering"],
+        "pdfLink": "/public/softwareEngineering/module5.pdf"
+      }
+    },
+    "DMDW": {
+      "Module 1": {
+        "topics": ["Database Design", "Normalization", "Relational Databases"],
+        "pdfLink": "public/pdf/DMDW-Module1.pdf"
+      },
+      "Module 2": {
+        "topics": ["SQL Queries", "Indexes", "Transactions"],
+        "pdfLink": "public/pdf/DMDW-Module2.1.pdf"
+      },
+      "Module 3": {
+        "topics": ["Data Warehousing", "ETL Processes", "OLAP vs OLTP"],
+        "pdfLink": "public/pdf/DMDW-Module3.pdf"
+      },
+      "Module 4": {
+        "topics": ["Big Data", "NoSQL Databases", "Data Lakes"],
+        "pdfLink": "/public/dmdw/module4.pdf"
+      },
+      "Module 5": {
+        "topics": ["Data Mining", "Machine Learning Integration", "Data Security"],
+        "pdfLink": "public/pdf/DMDW-Module5.pdf"
+      }
+    },
+    
+      "DBMS": {
+        "Module 1": {
+          "topics": ["Introduction to DBMS", "Database Models", "Relational Model"],
+          "pdfLink": "/public/dbms/module1.pdf"
+        },
+        "Module 2": {
+          "topics": ["SQL Basics", "Normalization", "ER Model"],
+          "pdfLink": "/public/dbms/module2.pdf"
+        },
+        "Module 3": {
+          "topics": ["Transaction Management", "Concurrency Control", "Recovery Techniques"],
+          "pdfLink": "/public/dbms/module3.pdf"
+        },
+        "Module 4": {
+          "topics": ["Indexing", "Hashing", "Database Design"],
+          "pdfLink": "/public/dbms/module4.pdf"
+        },
+        "Module 5": {
+          "topics": ["Distributed Databases", "NoSQL Databases", "Data Warehousing"],
+          "pdfLink": "/public/dbms/module5.pdf"
+        }
+      },
+      "DAA": {
+        "Module 1": {
+          "topics": ["Introduction to Algorithms", "Algorithm Design Techniques", "Big-O Notation"],
+          "pdfLink": "/public/daa/module1.pdf"
+        },
+        "Module 2": {
+          "topics": ["Divide and Conquer", "Greedy Algorithms", "Dynamic Programming"],
+          "pdfLink": "/public/daa/module2.pdf"
+        },
+        "Module 3": {
+          "topics": ["Graph Algorithms", "Shortest Path Problem", "Minimum Spanning Tree"],
+          "pdfLink": "/public/daa/module3.pdf"
+        },
+        "Module 4": {
+          "topics": ["Backtracking", "Branch and Bound", "NP-Completeness"],
+          "pdfLink": "/public/daa/module4.pdf"
+        },
+        "Module 5": {
+          "topics": ["String Matching Algorithms", "Approximation Algorithms", "Parallel Algorithms"],
+          "pdfLink": "/public/daa/module5.pdf"
+        }
+      },
+      "NLP": {
+    "Module 1": {
+      "topics": ["Introduction to NLP", "Text Preprocessing", "Tokenization"],
+      "pdfLink": "public/pdf/NLP_M1_Part-2_SPP (2)_240209_142232.pdf"
+    },
+    "Module 2": {
+      "topics": ["Part-of-Speech Tagging", "Named Entity Recognition", "Chunking"],
+      "pdfLink": "public/pdf/NLP_M1_Part-2_SPP (2)_240209_142232.pdf"
+    },
+    "Module 3": {
+      "topics": ["Bag of Words Model", "TF-IDF", "Word Embeddings"],
+      "pdfLink": "public/pdf/Nayan Ranjan Paul - NLP-3.pdf"
+    },
+    "Module 4": {
+      "topics": ["Language Modeling", "Recurrent Neural Networks", "LSTMs"],
+      "pdfLink": "public/pdf/NLP_M4_SPP (3).pdf"
+    },
+    "Module 5": {
+      "topics": ["Sentiment Analysis", "Text Classification", "Transformer Models"],
+      "pdfLink": "public/pdf/Nayan Ranjan Paul - NLP-5.pdf"
+    }
+  }
+    }
+    
